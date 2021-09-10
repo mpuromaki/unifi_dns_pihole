@@ -1,0 +1,36 @@
+{
+	"service": {
+		"nat": {
+			"rule": {
+				"1": {
+					"description": "Redirect DNS requests to pihole",
+					"destination": {
+						"port": "53"
+					},
+					"inbound-interface": "eth1",
+					"inside-address": {
+						"address": "_IP_PIHOLE_",
+						"port": "53"
+					},
+					"source": {
+						"address": "!_IP_PIHOLE_"
+					},
+					"log": "disable",
+					"protocol": "tcp_udp",
+					"type": "destination"
+				},
+				"6000": {
+					"description": "MASQ DNS requests to LAN",
+					"destination": {
+						"address": "_IP_PIHOLE_",
+						"port": "53"
+					},
+					"log": "disable",
+					"outbound-interface": "eth1",
+					"protocol": "tcp_udp",
+					"type": "masquerade"
+				}
+			}
+		}
+	}
+}
